@@ -1,0 +1,94 @@
+<!-- #BeginLibraryItem "/library/new_page_header.lbi" -->
+<!-- #EndLibraryItem -->
+<style type="text/css">
+        *{ padding:0; margin:0; list-style:none; border:0;}
+        .all{
+            width:500px;
+            height:600px;
+            padding:7px;
+            border:1px solid #ccc;
+            margin:100px auto;
+            position:relative;
+        }
+        .screen{
+            width:500px;
+            height:600px;
+            overflow:hidden;
+            position:relative;
+        }
+        .screen li{ width:500px; height:600px; overflow:hidden; float:left;}
+        .screen ul{ position:absolute; left:0; top:0px; width:3000px;}
+        .all ol{ position:absolute; right:10px; bottom:10px; line-height:20px; text-align:center;}
+        .all ol li{ float:left; width:20px; height:20px; background:#fff; border:1px solid #ccc; margin-left:10px; cursor:pointer;}
+        .all ol li.current{ background:yellow;}
+
+        #arr {display: none;}
+        #arr span{ width:40px; height:40px; position:absolute; left:5px; top:50%; margin-top:-20px; background:#000; cursor:pointer; line-height:40px; text-align:center; font-weight:bold; font-family:'黑体'; font-size:30px; color:#fff; opacity:0.3; border:1px solid #fff;}
+        #arr #right{right:5px; left:auto;}
+    </style>
+<header class="dis-box header-menu b-color color-whie"><a class="" href="javascript:history.go(-1)"><i class="iconfont icon-jiantou"></i></a>
+	<h3 class="box-flex">广告页面</h3>
+	<p><i class="iconfont icon-pailie j-nav-box"></i></p>
+</header>
+<div class="j-nav-content">
+	<ul class="dis-box new-footer-box">
+		<li class="box-flex">
+			<a href="{:url('index/index')}" class="nav-cont"><i class="nav-box"><img src="__TPL__/statics/img/home.png"></i><span>首页</span></a>
+		</li>
+		<li class="box-flex">
+			<a href="{:url('category/top_all')}" class="nav-cont"><i class="nav-box"><img src="__TPL__/statics/img/cate.png"></i><span>分类</span></a>
+			<li class="box-flex"><a href="javascript:;" class="nav-cont j-search-input"><i class="nav-box"><img src="__TPL__/statics/img/search.png"></i><span>搜索</span></a></li>
+			<li class="box-flex"><a href="{:url('flow/cart')}" class="nav-cont"><i class="nav-box"><img src="__TPL__/statics/img/flow.png"></i><span>购物车</span></a></li>
+			<li class="box-flex"><a href="{:url('user/index')}" class="nav-cont"><i class="nav-box"><img src="__TPL__/statics/img/user.png"></i><span>用户中心</span></a></li>
+	</ul>
+</div>
+
+
+<!-- 此处新加广告页面 -->
+
+<div class="all" id='all'>
+    <div class="screen" id="screen">
+        <ul id="ul">
+            <li><img src="images/1.jpg" width="500" height="600" /></li>
+            <li><img src="images/2.jpg" width="500" height="600" /></li>
+            <li><img src="images/3.jpg" width="500" height="600" /></li>
+            <li><img src="images/4.jpg" width="500" height="600" /></li>
+            <li><img src="images/5.jpg" width="500" height="600" /></li>
+        </ul>
+    </div>
+</div>
+<div style="position: fixed;right: 100px;top:100px;">今日累计收益：<span id="incomeing"></span></div>
+
+<!-- 广告页面结束 -->
+
+<!-- #BeginLibraryItem "/library/new_search.lbi" -->
+<!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" -->
+<!-- #EndLibraryItem -->
+<script type="text/javascript">
+	alert(1);
+	setInterval(autoPlay,3000);
+	var key = 0;
+	function autoPlay(){
+		$("#ul li:not("+ key +")").hide();
+		$("#ul li:eq("+ key +")").show();
+		key++;
+		if(key>=5){
+			key=0;
+		}
+	}
+
+	setInterval(pointAjax,{$activity_delta_time});
+	function pointAjax(){
+		$.ajax({
+			url:"index.php?c=activity&a=adv_ajax",
+			dataType:"json",
+			success:function(msg){
+				$("#incomeing").text(msg.point);
+			}
+		})
+	}
+</script>
+</body>
+
+</html>
